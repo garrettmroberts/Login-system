@@ -13,9 +13,10 @@ describe('API routes', () => {
       .request(server)
       .get('/api/users')
       .end((err, res) => {
-        assert.equal(err, null);
+        assert.isNull(err, 'No errors should be thrown.');
         assert.equal(res.status, 200, 'Response status should be 200.');
         assert.typeOf(res.body, 'array', 'Response should be an array.');
+        assert.isAtLeast(res.body.length, 1, 'Response array should contain one or more users.');
         done();
       });
     });
@@ -34,7 +35,7 @@ describe('API routes', () => {
         "location": "San Diego, CA"
       })
       .end((err, res) => {
-        assert.equal(err, null);
+        assert.isNull(err, 'No errors should be thrown.');
         assert.typeOf(res.body, 'object', 'Response should be an object.');
         done();
       });
@@ -43,7 +44,14 @@ describe('API routes', () => {
 
   describe('GET /api/users/id', () => {
     it('It should return the selected user by id', done => {
-     
+      chai
+      .request(server)
+      .get('/api/users/5ef62c0af735f308d7f335b7')
+      .end((err, res) => {
+        assert.isNull(err, 'No errors should be thrown.');
+        assert.typeOf(res.body, 'object', 'Response should be an object.');
+        done();
+      })
 
     })
   })

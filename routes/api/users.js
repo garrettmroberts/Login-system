@@ -9,6 +9,7 @@ router
 
 router
   .route('/:id')
-  .get(userController.findById);
+  .get(userController.findById)
+  .delete(userController.removeById)
 
 module.exports = router;

@@ -13,7 +13,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    match: /[a-zA-Z0-9]{8,}/
+    match: /[a-zA-Z0-9!@#$%^&*()?]{8,}/
   },
   firstName: {
     type: String,

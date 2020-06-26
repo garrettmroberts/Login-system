@@ -1,3 +1,4 @@
 module.exports = {
-exit: true
+exit: true,
+recursive: true
 }

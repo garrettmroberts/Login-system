@@ -2,10 +2,12 @@
   "name": "mocha-chai",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha || true",
-    "start": "nodemon server"
+    "start": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "concurrently": "^5.2.0",
     "mocha": "^8.0.1"
   },
   "dependencies": {

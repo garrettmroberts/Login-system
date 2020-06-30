@@ -1,0 +1,10 @@
+// Variables
+$primary: #6610f2;
+$secondary: #f4f4f4;
+$border-radius: 0;
+$border-radius-sm: 0;
+$border-radius-lg: 0;
+
+@import 'App';
+@import 'components/Login/style';
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

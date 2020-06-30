@@ -39,5 +39,10 @@ userSchema.pre(['insertMany', 'save'], function () {
   this.password = bcrypt.hashSync(this.password);
 });
 
+// Compares hashed with unhashed password
+userSchema.methods.verifyPassword = function verifyPassword(pw) {
+  return bcrypt.compareSync(pw, this.password);
+};
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;

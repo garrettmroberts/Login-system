@@ -32,7 +32,7 @@ describe('API routes', () => {
     });
   });
 
-  describe('POST /api.users', () => {
+  describe('POST /api/users', () => {
     it('It should create a new user instance in database', done => {
       chai
       .request(server)
@@ -149,4 +149,70 @@ describe('API routes', () => {
         })
     })
   });
+
+  describe('POST /api/users/login', () => {
+    it('It should log in a user when username and password are correct', done => {
+      let user = new User({
+        "email": "geo@dude.com",
+        "password": "sp0kaN3?",
+        "firstName": "Angela",
+        "lastName": "Perkins",
+        "location": "San Diego, CA"
+      });
+
+      chai
+      .request(server)
+      .post('/api/users')
+      .send(user)
+      .then(() => {
+        chai
+        .request(server)
+        .post('/api/users/login')
+        .send({
+          "email": "geo@dude.com",
+          "password": "sp0kaN3?",
+        })
+        .end((err, res) => {
+          assert.equal(res.status, 200);
+          assert.isNull(err);
+          assert.typeOf(res.body, 'object', 'Response should be an object.');
+          assert.equal(res.body.email, user.email);
+           assert.isTrue(bcrypt.compareSync(user.password, res.body.password));
+          done();
+        });
+      });
+    });
+
+    it('It should not login if password and email do not match', done => {
+    let user = new User({
+      "email": "geo@dude.com",
+      "password": "sp0kaN3?",
+      "firstName": "Angela",
+      "lastName": "Perkins",
+      "location": "San Diego, CA"
+    });
+
+    chai
+    .request(server)
+    .post('/api/users')
+    .send(user)
+    .then(() => {
+      chai
+      .request(server)
+      .post('/api/users/login')
+      .send({
+        "email": "geo@dude.com",
+        "password": "sp00kaN3?",
+      })
+      .end((err, res) => {
+        assert.equal(res.status, 401);
+        assert.isNull(err);
+        assert.typeOf(res.body, 'object', 'Response should be an empty object.');
+        done();
+      });
+    });
+  });
+  });
+
+  
 });

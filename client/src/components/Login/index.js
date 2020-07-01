@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Lock from '../../../node_modules/bootstrap-icons/icons/lock.svg';
+
+import API from '../../utils/API';
 import '../../css/main.css';
 
 
@@ -7,12 +9,12 @@ const Login = () => {
 
   const [state, setState] = useState({
     email: '',
-    password: ''
+    password: '',
+    errorMessage: ''
   })
 
   const handleInputChange = event => {
     const { type, value } = event.target;
-
     setState({
       ...state,
       [type]: value
@@ -21,7 +23,19 @@ const Login = () => {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    console.log(state)
+    API.login({
+      email: state.email,
+      password: state.password
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch(err => {
+      setState({
+        ...state,
+        errorMessage: 'Invalid username or password'
+      })
+    });
   }
 
   return (
@@ -50,7 +64,7 @@ const Login = () => {
       <button className='btn btn-lg btn-primary btn-block' type='submit' onClick={handleFormSubmit}>
         Login
       </button>
-      <small className='form-text input-helper' />
+  <small className='form-text'>{state.errorMessage}</small>
     </form>
   )
 };

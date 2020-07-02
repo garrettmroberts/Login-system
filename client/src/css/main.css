@@ -16,6 +16,24 @@ html, body, #app {
   margin: auto;
 }
 
+#signUpLock {
+  height: 50px;
+  width: 50px;
+  fill: #fd7e14;
+}
+
+#form-signup {
+  width: 100%;
+  text-align: center;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.signup-error-message {
+  display: block;
+}
+
 /*!
  * Bootstrap v5.0.0-alpha1 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

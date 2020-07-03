@@ -6,6 +6,11 @@ const routes = require('./routes');
 const passport = require('./scripts/passport');
 
 const app = express();
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -19,8 +24,6 @@ mongoose.connect((process.env.MONGODB_URI || 'mongodb://localhost/mysteryincorpo
 app.use(session({ secret: 'apple butter', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(express.static('client/build'));
 
 app.use(routes);
 

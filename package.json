@@ -10,11 +10,7 @@
     "test": "mocha || true",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
-  },
-  "engines": {
-    "node": "13.x"
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",

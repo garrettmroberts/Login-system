@@ -20,11 +20,9 @@ app.use(session({ secret: 'apple butter', resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(routes);
+app.use(express.static('client/build'));
 
-app.get('/', (req, res) => {
-  res.send('hello')
-})
+app.use(routes);
 
 const PORT = process.env.PORT || 3001;
 

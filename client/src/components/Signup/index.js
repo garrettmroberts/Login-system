@@ -4,7 +4,7 @@ import Lock from '../../../node_modules/bootstrap-icons/icons/lock.svg';
 import API from '../../utils/API';
 import '../../css/main.css';
 
-const Signup = () => {
+const Signup = (props) => {
   const [state, setState] = useState({});
 
   const handleInputChange = event => {
@@ -78,12 +78,17 @@ const Signup = () => {
         lastName: state.lastName,
         location: state.location
       })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        props.history.push('/home');
+      })
       .catch(err => {
         setState({
           ...state,
           errorMessage: 'It looks like this email is already being used for another account.'
-        })
+        });
+        document.getElementById('inputEmail').classList.add('is-invalid');
+        document.getElementById('inputEmail').classList.remove('is-valid');
       })
     }
   };
@@ -161,7 +166,7 @@ const Signup = () => {
         <div className='invalid-feedback'>Password must be at least eight characters long. </div>
       </div>
       <button className='btn btn-lg btn-primary btn-block' type='submit' onClick={handleFormSubmit}>
-        Login
+        Sign up
       </button>
       <small className='form-text'>{state.errorMessage}</small>
     </form>

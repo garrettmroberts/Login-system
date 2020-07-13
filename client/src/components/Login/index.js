@@ -5,7 +5,7 @@ import API from '../../utils/API';
 import '../../css/main.css';
 
 
-const Login = () => {
+const Login = (props) => {
 
   const [state, setState] = useState({
     email: '',
@@ -29,6 +29,7 @@ const Login = () => {
     })
     .then((res) => {
       console.log(res);
+      props.history.push('/home');
     })
     .catch(err => {
       setState({

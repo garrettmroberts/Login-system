@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Lock from '../../../node_modules/bootstrap-icons/icons/lock.svg';
-
+import { useStoreContext } from '../../utils/context';
 import API from '../../utils/API';
 import '../../css/main.css';
 
 const Signup = (props) => {
+  const [context, dispatch] = useStoreContext();
   const [state, setState] = useState({});
 
   const handleInputChange = event => {
@@ -79,7 +80,8 @@ const Signup = (props) => {
         location: state.location
       })
       .then(res => {
-        console.log(res);
+        const user = res.data;
+        dispatch({payload: user, type: 'login'});
         props.history.push('/home');
       })
       .catch(err => {

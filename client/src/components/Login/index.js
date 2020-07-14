@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Lock from '../../../node_modules/bootstrap-icons/icons/lock.svg';
-
+import { useStoreContext } from '../../utils/context';
 import API from '../../utils/API';
 import '../../css/main.css';
 
 
 const Login = (props) => {
+
+  const [context, dispatch] = useStoreContext();
 
   const [state, setState] = useState({
     email: '',
@@ -28,7 +30,8 @@ const Login = (props) => {
       password: state.password
     })
     .then((res) => {
-      console.log(res);
+      const user = res.data;
+      dispatch({payload: user, type: 'login'});
       props.history.push('/home');
     })
     .catch(err => {

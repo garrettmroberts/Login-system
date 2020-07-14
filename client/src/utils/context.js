@@ -9,7 +9,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         'loggedIn': true,
-        currentUser: action.user
+        currentUser: action.payload
       }
     default:
       console.log('invalid action');

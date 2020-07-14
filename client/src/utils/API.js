@@ -7,5 +7,9 @@ export default {
 
   signup: function(user) {
     return axios.post('/api/users', user);
+  },
+
+  checkLoginStatus: function() {
+    return axios.post('/api/users/checkloginstatus');
   }
 }

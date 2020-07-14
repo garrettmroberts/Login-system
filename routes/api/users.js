@@ -30,4 +30,14 @@ router
     res.redirect('/');
   });
 
+// matches /api/users.checkloginstatus
+router
+  .route('/checkloginstatus')
+  .post((req, res) => {
+    if (req.user) {
+      return res.json(req.user);
+    }
+    return res.json(null);
+  });
+
 module.exports = router;

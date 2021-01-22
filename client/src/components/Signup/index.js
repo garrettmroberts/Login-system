@@ -60,7 +60,7 @@ const Signup = (props) => {
     checkValidity(dataset.type, value);
   };
 
-  // Submits form to backend API, registering a user in the db
+  // Submits form to backend API, registering a user in the db, redirects to home
   const handleFormSubmit = event => {
     event.preventDefault();
     // Provides feedback if all fields are not correctly formatted or not filled in
@@ -71,7 +71,7 @@ const Signup = (props) => {
       checkValidity('location', state.location);
       checkValidity('password', state.password);
     } else {
-      // API call
+      // API call for signup
       API.signup({
         email: state.email,
         password: state.password,
@@ -111,7 +111,7 @@ const Signup = (props) => {
           data-type='email'
           className='form-control mb-1'
           placeholder='Email address'
-          pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$'
+          pattern={regex.email.toString}
           onChange={handleInputChange}
           required
         />
@@ -165,7 +165,7 @@ const Signup = (props) => {
           className='form-control mb-1'
           placeholder='password'
           onChange={handleInputChange}
-          pattern='[a-zA-Z0-9!@#$%^*()?]{8,}'
+          pattern={regex.password.toString}
           required
         />
         <div className='invalid-feedback'>Password must be at least eight characters long. </div>

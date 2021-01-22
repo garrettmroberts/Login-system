@@ -18,7 +18,7 @@ function App() {
       <StoreProvider>
         <div className='d-flex bg-secondary' id='app'>
           <Switch>
-            <Route exact path='/' component={Nothing} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/login' component={Login} />
             <Route exact path = '/signup' component={Signup} />
             <Route exact path = '/home' component={Home} />
